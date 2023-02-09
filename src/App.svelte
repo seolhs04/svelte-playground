@@ -1,10 +1,11 @@
 <script lang="ts">
-  
+  import Detail from './pages/Detail.svelte';
+  import Home from './pages/Home.svelte';
+  import Router from './components/Router.svelte';
+  import Route from './components/Route.svelte';
 </script>
 
-<main>
-
-</main>
-
-<style>
-</style>
+<Router>
+  <Route path="/" element={Home} />
+  <Route path="/detail" element={Detail} />
+</Router>
