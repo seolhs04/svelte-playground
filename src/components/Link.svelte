@@ -1,11 +1,10 @@
 <script lang="ts">
-  import {pagePath} from '../store/path';
-  export let to;
+  import {navigation} from '@/lib/navigation';
+  export let to: string;
 
-  const handleClick = (e) => {
+  const handleClick = (e: MouseEvent) => {
     e.preventDefault();
-    pagePath.set(to);
-    window.history.pushState('', '', to);
+    navigation(to);
   };
 </script>
 
