@@ -1,6 +1,6 @@
-import {pagePath} from '@/store/path';
+import {currentPath} from '@/store/path';
 
 export const navigation = (path: string) => {
-  pagePath.set(path);
+  currentPath.set(path);
   window.history.pushState('', '', path);
 };

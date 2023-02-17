@@ -1,23 +1,26 @@
-<script>
-  import {pagePath, routePathArr} from '@/store/path';
-  export let path;
-  export let element;
+<script lang="ts">
+  import {currentPath, pathArr} from '@/store/path';
+  import type {ComponentType} from 'svelte/internal';
+  export let path: string;
+  export let element: ComponentType;
 
-  let currentPath;
-  let routeList;
+  let _currentPath: string;
+  let _pathArr: Array<string>;
   const isGeneralPath = path === '*';
-  $: isIncludePathList = routeList.find((item) => item === currentPath);
+  $: isIncludePathList = _pathArr.find((item) => item === _currentPath);
 
-  routePathArr.subscribe((value) => (routeList = value));
-  pagePath.subscribe((value) => (currentPath = value));
+  pathArr.subscribe((value) => (_pathArr = value));
+  currentPath.subscribe((value) => (_currentPath = value));
 </script>
 
+<!-- normal page -->
 <div id={path}>
-  {#if path === currentPath}
+  {#if path === _currentPath}
     <svelte:component this={element} />
   {/if}
 </div>
 
+<!-- general path page -->
 {#if isGeneralPath && !isIncludePathList}
-  <h1>not found</h1>
+  <svelte:component this={element} />
 {/if}

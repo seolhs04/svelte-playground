@@ -1,16 +1,16 @@
 <script lang="ts">
-  import {pagePath, routePathArr} from '@/store/path';
+  import {currentPath, pathArr} from '@/store/path';
 
   const handlePopState = () => {
-    pagePath.set(window.location.pathname);
+    currentPath.set(window.location.pathname);
   };
   window.addEventListener('popstate', handlePopState);
 
   let routerElement: HTMLDivElement;
   $: childrenArr = routerElement && Array.from(routerElement.children);
-  $: if (childrenArr) routePathArr.set(getPathList(childrenArr));
+  $: if (childrenArr) pathArr.set(getPathList(childrenArr));
 
-  const getPathList = (childrenList) => {
+  const getPathList = (childrenList: Array<Element>) => {
     const list = childrenList.reduce((a, c) => {
       if (c.id !== '*') a.push(c.id);
       return a;
