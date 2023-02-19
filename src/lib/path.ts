@@ -1,4 +1,5 @@
-export const isMatch = (propsPath, currentPath) => {
+
+export const isMatch = (propsPath:string, currentPath:string) => {
   const pathArr = propsPath.split('/');
   const currentPathArr = currentPath.split('/');
   for (let i = 0; i < pathArr.length; i++) {
@@ -9,7 +10,7 @@ export const isMatch = (propsPath, currentPath) => {
   return pathArr.join('') === currentPathArr.join('');
 };
 
-export const isNotFound = (pathArr, currentPath, propsPath) => {
+export const isNotFound = (pathArr:Array<string>, currentPath:string, propsPath:string) => {
   if (propsPath !== '*') return;
   let result = true;
   for (let i = 0; i < pathArr.length; i++) {
@@ -19,4 +20,12 @@ export const isNotFound = (pathArr, currentPath, propsPath) => {
     }
   }
   return result;
+};
+
+export const getPathListByElement = (childrenList: Array<Element>) => {
+  const list = childrenList.reduce((a, c) => {
+    if (c.id !== '*') a.push(c.id);
+    return a;
+  }, []);
+  return list;
 };

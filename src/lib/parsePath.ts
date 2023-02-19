@@ -24,3 +24,13 @@ export const getUrlParams = (path, currentPath) => {
   });
   return params;
 };
+
+export const createParamsObj = (path, currentPath)=>{
+  try {
+    const parsedPath = parsePath(path);
+    const paramsObj = getUrlParams(parsedPath, currentPath);
+    return paramsObj
+  } catch (e) {
+    return {}
+  }
+}

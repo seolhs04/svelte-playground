@@ -1,4 +1,5 @@
 <script lang="ts">
+  import {getPathListByElement} from '@/lib/path';
   import {currentPath, pathArr} from '@/store/path';
 
   const handlePopState = () => {
@@ -7,16 +8,9 @@
   window.addEventListener('popstate', handlePopState);
 
   let routerElement: HTMLDivElement;
-  $: childrenArr = routerElement && Array.from(routerElement.children);
-  $: if (childrenArr) pathArr.set(getPathList(childrenArr));
 
-  const getPathList = (childrenList: Array<Element>) => {
-    const list = childrenList.reduce((a, c) => {
-      if (c.id !== '*') a.push(c.id);
-      return a;
-    }, []);
-    return list;
-  };
+  $: childrenArr = routerElement && Array.from(routerElement.children);
+  $: if (childrenArr) pathArr.set(getPathListByElement(childrenArr));
 </script>
 
 <div bind:this={routerElement}>
